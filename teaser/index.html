@@ -25,15 +25,21 @@ html.locked .after-theatre{display:none}
 .theatre{position:relative;background:var(--night);isolation:isolate;max-width:1920px;margin:auto;--flap:0;--light:0;--zoom:1;--flash:0;--nudge:0}
 .scene{position:relative;min-height:700px;overflow:hidden}
 .text-action{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;margin-top:32px;padding:7px 0;border:0;border-bottom:1px solid currentColor;background:none;text-decoration:none;font-size:16px;color:inherit}.text-action:hover{color:var(--gold)}
-.image-note{position:absolute;bottom:24px;left:6%;font-size:13px;line-height:1.5;color:var(--muted);max-width:70%;z-index:3;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.image-note{position:absolute;bottom:22px;left:6%;font-size:13px;line-height:1.5;color:var(--muted);max-width:calc(var(--split,70%) - 6%);z-index:3}
 
 /* Scene 1: the photograph never moves */
-.homecoming{height:100svh;min-height:600px}.home-photograph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%;transform:none!important;animation:none!important;transition:none!important}.home-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.46) 34%,transparent 66%),linear-gradient(0deg,rgba(0,0,0,.55),transparent 22%)}.home-copy{position:absolute;left:6%;top:50%;transform:translateY(-52%);max-width:670px;z-index:3}.home-copy p{margin-top:30px;font-size:clamp(20px,2vw,28px);line-height:1.5}
-.cta{display:inline-flex;align-items:center;gap:18px;margin-top:44px;padding:0 30px;min-height:62px;background:var(--paper);color:var(--ink);text-decoration:none;font-size:17px;font-weight:500;letter-spacing:.01em;border-radius:3px;box-shadow:0 14px 44px rgba(0,0,0,.45);transition:transform 400ms var(--ease),background 300ms ease}.cta:hover{background:#fff;transform:translateY(-2px)}.cta .arrow{margin-left:0;width:24px;height:24px}.theatre[data-scene=home] .cta{animation:beckon 2600ms ease-out infinite}@keyframes beckon{from{box-shadow:0 14px 44px rgba(0,0,0,.45),0 0 0 0 rgba(245,239,230,.35)}to{box-shadow:0 14px 44px rgba(0,0,0,.45),0 0 0 20px rgba(245,239,230,0)}}
+.homecoming,.leaflets-scene{--split:46%;--band:64px}.homecoming{height:auto;min-height:max(600px,100svh)}.home-photograph{position:absolute;top:0;left:var(--split);width:calc(100% - var(--split));height:calc(100% - var(--band));max-height:max(460px,100svh - var(--band));object-fit:cover;object-position:62% 50%;transform:none!important;animation:none!important;transition:none!important}.home-shade,.leaflets-shade{position:absolute;top:0;left:var(--split);right:0;height:calc(100% - var(--band));max-height:max(460px,100svh - var(--band));background:linear-gradient(90deg,var(--night),rgba(5,6,6,0) 7%),linear-gradient(0deg,var(--night),rgba(5,6,6,0) 7%)}
+/* Text never sits on an illustration: each copy block is in the flow, in its own column, clear of the brand above and the band below. */
+.home-copy,.paper-copy,.compass-copy,.leaflets-copy,.polaris-copy{position:relative;margin-left:6%;min-height:max(600px,100svh);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:96px 0 104px;z-index:4}
+.home-copy,.leaflets-copy{width:calc(var(--split) - 10%)}.home-copy h1{font-size:clamp(40px,4.8vw,80px)}.home-copy p{margin-top:30px;font-size:clamp(20px,2vw,28px);line-height:1.5}
+.cta{position:relative;display:inline-flex;align-items:center;gap:18px;margin-top:44px;padding:0 32px;min-height:64px;border:0;background:var(--gold);color:var(--night);text-decoration:none;font-size:18px;font-weight:650;letter-spacing:.01em;border-radius:40px;box-shadow:0 14px 44px rgba(0,0,0,.5),0 0 34px rgba(201,169,97,.45);transition:transform 400ms var(--ease),background 300ms ease}.cta:hover{background:#e3c77e;transform:translateY(-2px)}.cta:disabled{opacity:.6}.cta .arrow{margin-left:0;width:26px;height:26px;stroke-width:2}
+/* The one way through: every primary step is gold and calls with a ring. Detours are quieter. */
+.cta::after,.scroll-on::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;animation:path-ring 2200ms ease-out infinite}@keyframes path-ring{from{box-shadow:0 0 0 0 rgba(201,169,97,.7)}to{box-shadow:0 0 0 22px rgba(201,169,97,0)}}
+.theatre .demo-link,.theatre .stress-link,.foundation-link{color:var(--muted);font-size:14px;border-bottom-color:rgba(217,221,218,.35)}
 
 /* Scene 2: the paper world. The stage is the approved still, 1672 x 941, scaled to cover the frame. */
-.paper-scene,.compass-scene{background:var(--night);min-height:600px;height:100svh}
-.stage-frame{position:absolute;inset:0;overflow:hidden;container-type:size;background:var(--night);--stage-w:max(100cqw,calc(100cqh * 1672 / 941));--stage-h:calc(var(--stage-w) * 941 / 1672);--stage-x:calc((100cqw - var(--stage-w)) / 2);--stage-y:calc((100cqh - var(--stage-h)) / 2)}
+.paper-scene,.compass-scene,.polaris-scene{background:var(--night);min-height:max(600px,100svh);height:auto}
+.stage-frame{position:absolute;inset:0 0 auto;height:min(100%,max(600px,100svh));overflow:hidden;container-type:size;background:var(--night);--stage-w:max(100cqw,calc(100cqh * 1672 / 941));--stage-h:calc(var(--stage-w) * 941 / 1672);--stage-x:calc((100cqw - var(--stage-w)) / 2);--stage-y:calc((100cqh - var(--stage-h)) / 2)}
 .stage{position:absolute;left:50%;top:50%;width:var(--stage-w);height:var(--stage-h);transform:translate(-50%,-50%) scale(calc(var(--dolly) * var(--zoom)));transform-origin:66.93% 62.17%;container-type:size}
 .world{position:absolute;inset:0;perspective:203cqw;perspective-origin:50% 52.6%}
 .world>img,.plate,.floor-unlit{position:absolute;inset:0;width:100%;height:100%}.plate-compass{background:var(--asset-compass-plate) center/100% 100% no-repeat}.floor-unlit{background:var(--asset-floor-unlit) center/100% 100% no-repeat}
@@ -59,7 +65,7 @@ html.locked .after-theatre{display:none}
 .flap-reflection .flap-front::after{background:linear-gradient(90deg,rgba(40,28,14,.24),rgba(40,28,14,0) 40%,rgba(255,236,190,0) 68%,rgba(255,236,190,.62));opacity:var(--flap)}
 @keyframes seam{from{opacity:.3}to{opacity:.7}}
 @keyframes dolly{from{--dolly:1.04}to{--dolly:1}}
-.paper-copy{position:absolute;left:6%;top:50%;transform:translateY(-50%);width:40%;z-index:4}.paper-copy h2 em{color:var(--gold)}.paper-copy>p{margin-top:26px;color:var(--muted);font-size:21px;line-height:1.6}
+.paper-copy{width:40%}.paper-copy h2 em{color:var(--gold)}.paper-copy>p{margin-top:26px;color:var(--muted);font-size:21px;line-height:1.6}
 
 /* Scene 3: The Compass stands where the paper stood */
 .card-stand{position:absolute;margin:0;z-index:3;left:calc(var(--stage-x) + var(--stage-w) * .5383);bottom:calc(var(--stage-y) + var(--stage-h) * .252);width:calc(var(--stage-w) * .2823)}
@@ -68,13 +74,13 @@ html.locked .after-theatre{display:none}
 .card-body{position:relative}
 .card{width:100%;height:auto;border-radius:1cqw;box-shadow:0 2.4cqw 4.5cqw rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.14),0 0 6cqw rgba(255,214,150,.18);-webkit-box-reflect:below .2cqw linear-gradient(rgba(0,0,0,0) 58%,rgba(0,0,0,.32))}
 .card-body::before{content:'';position:absolute;left:-6%;right:-6%;top:calc(100% - .6cqw);height:2.6cqw;background:radial-gradient(ellipse at 50% 0,rgba(0,0,0,.75),rgba(0,0,0,0) 70%);z-index:-1}
-.compass-copy{position:absolute;left:6%;top:50%;transform:translateY(-50%);width:40%;z-index:4}
-.product-signature{display:flex;align-items:center;gap:12px;color:var(--gold);font-size:17px;margin-bottom:28px}.product-signature svg{width:38px;height:38px}.compass-copy h2 em{color:var(--gold)}.compass-copy>p{max-width:35ch;margin-top:26px}.compass-copy .text-action{font-size:15px}.evidence-note{font-size:13px;line-height:1.5;margin-top:18px;color:var(--muted)}.scroll-on{position:absolute;left:0;right:0;bottom:20px;width:max-content;max-width:88%;margin:auto;z-index:5;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:44px;padding:4px 12px;text-align:center;font-size:15px;line-height:1.4;letter-spacing:.02em;color:var(--paper);text-decoration:none}.scroll-on-detail{font-size:13px;color:var(--muted)}.scroll-on:hover{color:var(--gold)}.scroll-on .arrow{transform:rotate(90deg);margin:4px 0 0;width:22px;height:22px;color:var(--gold)}@keyframes nudge-down{0%,100%{transform:rotate(90deg) translateX(0)}50%{transform:rotate(90deg) translateX(7px)}}.replay{display:block;margin-top:22px;padding:5px 0;min-height:44px;background:none;border:0;text-decoration:underline;text-underline-offset:5px;color:var(--paper);font-size:13px}
+.compass-copy{width:40%}
+.product-signature{display:flex;align-items:center;gap:12px;color:var(--gold);font-size:17px;margin-bottom:28px}.product-signature svg{width:38px;height:38px}.compass-copy h2 em{color:var(--gold)}.compass-copy>p{max-width:35ch;margin-top:26px}.compass-copy .text-action{font-size:15px}.evidence-note{font-size:13px;line-height:1.5;margin-top:18px;color:var(--muted)}.scroll-on{position:relative;margin:30px 0 0;width:max-content;max-width:100%;z-index:5;display:flex;flex-direction:column;align-items:center;gap:0;min-height:44px;padding:10px 30px 8px;text-align:center;font-size:18px;font-weight:650;line-height:1.35;letter-spacing:.02em;color:var(--night);background:var(--gold);border-radius:34px;box-shadow:0 14px 44px rgba(0,0,0,.55),0 0 34px rgba(201,169,97,.45);text-decoration:none}.scroll-on-detail{font-size:13px;font-weight:500;color:rgba(5,6,6,.78)}.scroll-on:hover{background:#e3c77e}.scroll-on .arrow{transform:rotate(90deg);margin:2px 0 0;width:26px;height:26px;stroke-width:2;color:var(--night)}@keyframes nudge-down{0%,100%{transform:rotate(90deg) translateX(0)}50%{transform:rotate(90deg) translateX(7px)}}.replay{display:block;margin-top:22px;padding:5px 0;min-height:44px;background:none;border:0;text-decoration:underline;text-underline-offset:5px;color:var(--paper);font-size:13px}
 
 /* Scene 4: the pile of old leaflets. The image is static. */
-.leaflets-scene{height:100svh;min-height:600px;background:var(--night)}.leaflets-photograph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}.leaflets-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.6) 38%,rgba(0,0,0,.06) 68%),linear-gradient(0deg,rgba(0,0,0,.55),transparent 28%)}.leaflets-copy{position:absolute;left:6%;top:50%;transform:translateY(-50%);max-width:640px;z-index:3}.eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}.leaflets-copy h2{font-size:clamp(38px,4.4vw,64px)}.leaflets-copy h2 em{color:var(--gold)}.leaflets-copy>p:not(.eyebrow){margin-top:20px;font-size:clamp(17px,1.3vw,20px);line-height:1.55;max-width:54ch}.leaflets-copy .cta{margin-top:36px}.leaflets-copy .stress-link{margin-top:22px;font-size:15px}
+.leaflets-scene{height:auto;min-height:max(600px,100svh);background:var(--night)}.leaflets-photograph{position:absolute;top:0;left:var(--split);width:calc(100% - var(--split));height:calc(100% - var(--band));max-height:max(460px,100svh - var(--band));object-fit:cover;object-position:74% 50%}.eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}.leaflets-copy h2{font-size:clamp(32px,3.6vw,60px)}.leaflets-copy h2 em{color:var(--gold)}.leaflets-copy>p:not(.eyebrow){margin-top:18px;font-size:clamp(16px,1.25vw,20px);line-height:1.55;max-width:54ch}.leaflets-copy .cta{margin-top:36px}.leaflets-copy .stress-link{margin-top:22px;font-size:15px}
 .compass-actions .cta{margin-top:30px}.compass-actions .demo-link{margin-top:22px;display:inline-flex}.enlarge{display:inline-flex;align-items:center;gap:8px;margin:14px 18px 0 0;padding:0;min-height:44px;border:0;background:none;font-size:14px;text-decoration:underline;text-underline-offset:5px;color:var(--muted)}.enlarge:hover{color:var(--gold)}.enlarge svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.6;fill:none}
-.lightbox{width:min(96vw,1200px);max-width:none;max-height:96svh;margin:auto;padding:0;border:0;border-radius:6px;background:#0d0f10;color:var(--paper);box-shadow:0 30px 80px rgba(0,0,0,.7)}.lightbox::backdrop{background:rgba(3,4,4,.88)}.lightbox img{width:auto;max-width:100%;max-height:calc(96svh - 92px);margin:auto}.lightbox-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;font-size:14px}.lightbox-bar p{color:var(--muted);max-width:60ch}.lightbox-bar button{min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.4);border-radius:22px;background:none;font-size:14px}.lightbox-bar button:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}.polaris-copy{position:absolute;left:6%;top:50%;transform:translateY(-50%);width:40%;z-index:4}.polaris-copy h2 em{color:var(--gold)}.polaris-copy>p{max-width:36ch;margin-top:26px}.polaris-copy .text-action{font-size:15px}
+.lightbox{width:min(96vw,1200px);max-width:none;max-height:96svh;margin:auto;padding:0;border:0;border-radius:6px;background:#0d0f10;color:var(--paper);box-shadow:0 30px 80px rgba(0,0,0,.7)}.lightbox::backdrop{background:rgba(3,4,4,.88)}.lightbox img{width:auto;max-width:100%;max-height:calc(96svh - 92px);margin:auto}.lightbox-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;font-size:14px}.lightbox-bar p{color:var(--muted);max-width:60ch}.lightbox-bar button{min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.4);border-radius:22px;background:none;font-size:14px}.lightbox-bar button:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}.polaris-copy{width:40%}.polaris-copy h2 em{color:var(--gold)}.polaris-copy>p{max-width:36ch;margin-top:26px}.polaris-copy .text-action{font-size:15px}
 
 /* Enhanced (JavaScript) sequencing */
 /* One scene is in the document at a time. Nothing is clipped: a short or zoomed viewport scrolls within the scene, and the page below stays hidden until Polaris. */
@@ -127,7 +133,7 @@ html:not(.enhanced) .floor-unlit,html:not(.enhanced) .flap,html:not(.enhanced) .
 .leaf-stamp{color:#503b21;text-anchor:middle;stroke:none}.leaf-stamp text{fill:currentColor}.leaf-stamp .stamp-rule{fill:none;stroke:currentColor;stroke-width:1}.stamp-eyebrow,.stamp-detail{font-size:13px;letter-spacing:.52px}.stamp-title{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:38px}
 .illustration-note{margin:14px 0 0;font-size:12px;line-height:1.6;color:var(--muted);max-width:60ch}
 .light-reading{display:grid;gap:22px;align-content:start;min-width:0}.light-controls{display:grid;gap:18px;justify-items:start}
-.light-switch{margin-top:0}.light-switch[aria-pressed=true]{color:var(--gold)}.enhanced .light-switch[aria-pressed=false]{color:var(--gold);animation:beckon 2400ms ease-in-out infinite}@keyframes beckon{0%,100%{text-shadow:0 0 0 rgba(201,169,97,0)}50%{text-shadow:0 0 14px rgba(201,169,97,.85)}}.lamp-cue{position:absolute;inset:0;display:grid;place-content:center;gap:4px;padding:6%;text-align:center;font-size:clamp(15px,1.5vw,19px);line-height:1.45;color:var(--paper);text-shadow:0 1px 12px rgba(0,0,0,.8);background:radial-gradient(ellipse 62% 42% at 50% 50%,rgba(5,6,6,.72),rgba(5,6,6,0) 78%);pointer-events:none;transition:opacity 700ms var(--ease)}.lamp-cue strong{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(24px,2.4vw,34px);color:var(--gold)}.lamp-cue.gone{opacity:0}.lamp-media.unlit{cursor:pointer}html:not(.enhanced) .leaf-photo-lit{opacity:1}html:not(.enhanced) .leaf-watermark{opacity:.32}
+.light-switch{margin-top:0}.light-switch[aria-pressed=true]{background:none;color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}.light-switch[aria-pressed=true]::after{animation:none}.onward{margin-top:8px;justify-self:start}.onward .arrow{transform:rotate(90deg)}.lamp-cue{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 14px;font-size:clamp(15px,1.3vw,18px);line-height:1.45;color:var(--paper)}.lamp-cue strong{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(24px,2.4vw,34px);color:var(--gold)}.lamp-cue.gone{display:none}.lamp-media.unlit{cursor:pointer}html:not(.enhanced) .leaf-photo-lit{opacity:1}html:not(.enhanced) .leaf-watermark{opacity:.32}
 .proof-tabs{display:flex;flex-wrap:wrap;gap:8px}.proof-tabs button{padding:9px 14px;border:1px solid rgba(255,255,255,.45);border-radius:22px;font-size:13px;min-height:44px;background:rgba(22,20,17,.8);color:var(--paper)}.proof-tabs button[aria-selected=true]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .proof-explanation{min-height:130px;max-width:46ch}.proof-explanation h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(26px,2.2vw,32px);line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}.proof-explanation p{font-size:16px;color:#e1ded6}
 .clinical-foundation p{max-width:46ch}.clinical-foundation .foundation-detail{font-size:15px;color:var(--muted)}.considered{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:12px;max-width:52ch}.considered li{position:relative;padding-left:26px;font-size:15px;line-height:1.55;color:var(--muted)}.considered li::before{content:'';position:absolute;left:0;top:.62em;width:12px;height:12px;border-radius:50%;background:var(--gold);opacity:.9}.considered strong{display:block;font-weight:500;color:var(--paper)}.enhanced .imprint-list{display:none}.foundation-link{margin-top:4px}
@@ -135,17 +141,21 @@ html:not(.enhanced) .floor-unlit,html:not(.enhanced) .flap,html:not(.enhanced) .
 
 /* ---- Responsive --------------------------------------------------------------------------- */
 @media(min-width:1700px){.home-copy{padding-top:140px}}
-@media(max-width:1000px){.paper-copy,.compass-copy{width:44%}.paper-copy h2,.compass-copy h2{font-size:52px}.paper-copy>p{font-size:18px}.compass-copy>p{font-size:16px}.theatre-controls{gap:16px}.scroll-on{bottom:64px}}
-@media(max-width:650px){
+@media(max-width:900px){.homecoming,.leaflets-scene{--split:52%}.cta{padding:0 24px;font-size:17px}}
+@media(max-width:1000px){.paper-copy,.compass-copy{width:44%}.paper-copy h2,.compass-copy h2{font-size:52px}.paper-copy>p{font-size:18px}.compass-copy>p{font-size:16px}.theatre-controls{gap:16px}}
+@media(max-width:650px),(orientation:portrait) and (max-width:1024px){
 body{font-size:16px}.brand{font-size:13px;gap:8px}.brand svg{width:32px;height:32px}.brand strong{font-size:9px}.overlay-brand{left:6%;top:16px}
-.homecoming{height:100svh;min-height:640px}.home-photograph{object-position:66% center}.home-shade{background:linear-gradient(180deg,rgba(0,0,0,.65),rgba(0,0,0,.1) 38%,rgba(0,0,0,.84) 75%)}.home-copy{position:absolute;inset:0;transform:none;padding:80px 6% 34px;max-width:none;display:flex;flex-direction:column;align-items:flex-start}.home-copy h1{font-size:clamp(43px,11.5vw,64px);max-width:8ch}.home-copy p{font-size:21px;margin-top:auto}.home-copy .cta{margin-top:18px;margin-bottom:96px;width:100%;justify-content:space-between}.image-note{bottom:83px;font-size:12px;max-width:88%}
+/* Stacked: words, then the picture, then the way on. Nothing is printed over a picture. */
+.homecoming,.leaflets-scene{--scene-display:flex;flex-direction:column;height:auto;min-height:100svh}.home-shade,.leaflets-shade{display:none}.home-copy,.leaflets-copy{display:contents}.home-copy>*,.leaflets-copy>*{order:0;flex:none;margin-left:6%;margin-right:6%;max-width:88%;align-self:flex-start}
+.home-photograph,.leaflets-photograph{position:relative;top:auto;left:auto;order:1;flex:none;width:100%;height:clamp(220px,38svh,520px);margin-top:22px}.home-photograph{object-position:62% 45%}.leaflets-photograph{object-position:74% 50%}
+.home-copy h1{margin-top:76px;font-size:clamp(40px,11vw,64px)}.home-copy p{font-size:20px;margin-top:12px}.home-copy .cta,.leaflets-copy .cta{order:2;margin-top:22px;align-self:stretch;justify-content:space-between}.image-note{position:relative;left:auto;bottom:auto;order:3;flex:none;margin:14px 6% 96px;font-size:12px;max-width:88%}
 .theatre-controls{left:6%;right:6%;bottom:14px;justify-content:space-between;border-top:1px solid rgba(201,169,97,.3);padding-top:8px;font-size:12px;gap:12px}.theatre-controls button,.theatre-controls a{font-size:12px}
 .paper-scene,.compass-scene{min-height:700px;height:auto}
 .stage-frame{--stage-w:clamp(980px,300cqw,calc(100cqh * 1.5));--stage-y:calc(100cqh - var(--stage-h))}.stage{top:auto;bottom:0;transform:translate(-67.9%,0) scale(calc(var(--dolly) * var(--zoom)))}
-.paper-scene,.compass-scene,.polaris-scene{--scene-display:flex;display:flex;flex-direction:column;height:auto;min-height:100svh}.paper-copy,.compass-copy,.polaris-copy{display:contents}.paper-copy>*,.compass-copy>*,.polaris-copy>*{order:0;flex:none;margin-left:6%;margin-right:6%;align-self:flex-start;max-width:88%}.paper-copy>h2,.compass-copy>.product-signature,.polaris-copy>.product-signature{margin-top:64px}.compass-copy>h2,.polaris-copy>h2{margin-top:0}.paper-scene .stage-frame,.compass-scene .stage-frame,.polaris-scene .stage-frame{position:relative;inset:auto;flex:none;height:clamp(320px,54svh,640px);order:1;margin-top:8px}.compass-actions,.polaris-actions{position:relative;inset:auto;flex:none;order:2;margin:0;max-width:none;align-self:stretch;padding:10px 6% 58px;z-index:4;background:linear-gradient(180deg,rgba(5,6,6,0),rgba(5,6,6,.92) 28%)}.compass-actions .cta{margin-top:0;width:100%;justify-content:space-between}.compass-actions .demo-link,.polaris-actions .demo-link{margin-top:12px}.compass-actions .evidence-note,.polaris-actions .evidence-note{margin-top:6px;font-size:12px}.compass-actions .replay,.polaris-actions .replay{display:none}.theatre:is([data-scene=compass],[data-scene=polaris]) .theatre-controls .replay-bar{display:inline-flex}.polaris-actions{padding-bottom:0}.scroll-on{position:relative;bottom:auto;order:3;flex:none;margin:0 auto 70px;padding:0 12px;font-size:14px}.scroll-on-detail{font-size:12px}.scroll-on .arrow{width:18px;height:18px;margin-top:0}
+.paper-scene,.compass-scene,.polaris-scene{--scene-display:flex;display:flex;flex-direction:column;height:auto;min-height:100svh}.paper-copy,.compass-copy,.polaris-copy{display:contents}.paper-copy>*,.compass-copy>*,.polaris-copy>*{order:0;flex:none;margin-left:6%;margin-right:6%;align-self:flex-start;max-width:88%}.paper-copy>h2,.compass-copy>.product-signature,.polaris-copy>.product-signature{margin-top:64px}.compass-copy>h2,.polaris-copy>h2{margin-top:0}.paper-scene .stage-frame,.compass-scene .stage-frame,.polaris-scene .stage-frame{position:relative;inset:auto;flex:none;height:clamp(320px,54svh,640px);order:1;margin-top:8px}.compass-actions,.polaris-actions{position:relative;inset:auto;flex:none;order:2;margin:0;max-width:none;align-self:stretch;padding:10px 6% 58px;z-index:4;background:linear-gradient(180deg,rgba(5,6,6,0),rgba(5,6,6,.92) 28%)}.compass-actions .cta{margin-top:0;width:100%;justify-content:space-between}.compass-actions .demo-link,.polaris-actions .demo-link{margin-top:12px}.compass-actions .evidence-note,.polaris-actions .evidence-note{margin-top:6px;font-size:12px}.compass-actions .replay,.polaris-actions .replay{display:none}.theatre:is([data-scene=compass],[data-scene=polaris]) .theatre-controls .replay-bar{display:inline-flex}.polaris-actions{padding-bottom:0}.scroll-on{position:relative;left:auto;bottom:auto;order:3;flex:none;margin:8px auto 76px;padding:9px 24px 7px;font-size:17px}.scroll-on-detail{font-size:12px}.scroll-on .arrow{width:22px;height:22px;margin-top:0}
 .card-stand,.polaris-stand{left:50%;transform:translateX(-50%);bottom:calc(var(--stage-h) * .23);width:min(86cqw,calc((100cqh - var(--stage-h) * .23 - 14px) * 918 / 1070))}.polaris-stand{width:min(86cqw,calc((100cqh - var(--stage-h) * .23 - 74px) * 1100 / 1082))}.star{width:min(14cqw,54px);bottom:calc(100% + 10px)}
-.leaflets-photograph{object-position:64% 50%}.leaflets-shade{background:linear-gradient(180deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.66) 42%,rgba(0,0,0,.18) 60%,rgba(0,0,0,.86) 84%)}.leaflets-copy{position:absolute;inset:0;transform:none;max-width:none;padding:64px 6% 34px;display:flex;flex-direction:column;align-items:flex-start}.leaflets-copy h2{font-size:34px}.leaflets-copy>p:not(.eyebrow){font-size:15px;line-height:1.5;margin-top:12px}.leaflets-copy .cta{margin-top:auto;margin-bottom:12px;width:100%;justify-content:space-between}.leaflets-copy .stress-link{margin:0 0 96px;font-size:14px}
-.paper-copy h2,.compass-copy h2{font-size:40px;line-height:1.06}.paper-copy>p{font-size:16px;line-height:1.5;margin-top:12px}.paper-copy .text-action{margin-top:14px;font-size:15px;min-height:44px}
+.leaflets-copy .eyebrow{margin-top:72px;margin-bottom:12px}.leaflets-copy h2{font-size:34px}.leaflets-copy>p:not(.eyebrow){font-size:15px;line-height:1.5;margin-top:12px;max-width:88%}.leaflets-copy .stress-link{order:2;margin-top:14px;font-size:14px}
+.paper-copy h2,.compass-copy h2{font-size:40px;line-height:1.06}.paper-copy>p{font-size:16px;line-height:1.5;margin-top:12px}.paper-copy .cta{margin-top:18px;width:100%;justify-content:space-between;font-size:17px}
 .compass-copy .product-signature,.polaris-copy .product-signature{font-size:13px;margin-bottom:10px}.compass-copy .product-signature svg,.polaris-copy .product-signature svg{width:26px;height:26px}.compass-copy h2,.polaris-copy h2{font-size:34px}.compass-copy>p,.polaris-copy>p{font-size:14px;margin-top:10px;max-width:none}.compass-copy .text-action{margin-top:10px;font-size:14px}.evidence-note{font-size:12px;margin-top:10px}.replay{margin-top:4px;font-size:12px;min-height:40px}
 
 
@@ -155,7 +165,7 @@ footer{display:block;padding:24px 6%}footer details{margin-top:14px}
 @media(max-width:360px){.paper-copy h2,.compass-copy h2{font-size:34px}}
 
 /* Short viewports (a phone held sideways, a laptop at 200% zoom): the opening copy sits in the frame with its call to action, and every scene may scroll. */
-@media(max-height:540px) and (min-width:651px){.homecoming{min-height:0}.home-copy{top:auto;bottom:70px;transform:none;max-width:560px}.home-copy h1{font-size:clamp(30px,8vh,48px)}.home-copy p{margin-top:10px;font-size:17px}.home-copy .cta{margin-top:16px;min-height:50px;padding:0 22px;font-size:15px}.image-note{bottom:14px;max-width:50%}.overlay-brand{top:12px}.paper-scene,.compass-scene,.polaris-scene{min-height:560px}.paper-copy>p{margin-top:14px;font-size:17px}.compass-copy>p,.polaris-copy>p{margin-top:14px;font-size:15px}.paper-copy h2,.compass-copy h2,.polaris-copy h2{font-size:40px}.paper-copy,.compass-copy,.polaris-copy{top:44%}}
+@media(max-height:540px) and (min-width:651px){.home-copy h1{font-size:clamp(30px,8vh,48px)}.home-copy p{margin-top:10px;font-size:17px}.home-copy .cta{margin-top:16px;min-height:50px;padding:0 22px;font-size:15px}.overlay-brand{top:12px}.home-copy,.paper-copy,.compass-copy,.leaflets-copy,.polaris-copy{min-height:max(420px,100svh);padding:72px 0 88px}.paper-copy>p{margin-top:14px;font-size:17px}.compass-copy>p,.polaris-copy>p{margin-top:14px;font-size:15px}.paper-copy h2,.compass-copy h2,.polaris-copy h2{font-size:40px}}
 /* Export mode (?export): the theatre fills the viewport for 16:9 and 9:16 frame captures */
 html.export .skip,html.export .theatre-controls{display:none!important}html.export.enhanced .theatre{height:100svh!important;min-height:0!important;max-width:none;overflow:hidden}html.export.enhanced .scene{height:100svh!important;min-height:0!important}
 
@@ -221,7 +231,7 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
 </div>
 </div>
 </div>
-<div class="paper-copy"><h2 id="paper-heading" tabindex="-1">The questions <br><em>don’t.</em></h2><p>Some information <br>needs a way back in.</p><button class="text-action door-control" id="open-door" type="button" hidden>Open the paper door <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button><a class="text-action fallback-door" href="#recovery">Discover The Compass <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+<div class="paper-copy"><h2 id="paper-heading" tabindex="-1">The questions <br><em>don’t.</em></h2><p>Some information <br>needs a way back in.</p><button class="cta door-control" id="open-door" type="button" hidden>Open the paper door <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button><a class="text-action fallback-door" href="#recovery">Discover The Compass <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
 </section>
 
 <section class="scene compass-scene" id="recovery" aria-labelledby="compass-title">
@@ -268,8 +278,7 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
 <path d="M 342.00 123.04 A 172 172 0 1 1 170.00 123.04" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
 <circle cx="256" cy="272" r="14" fill="currentColor"/>
 <path d="M 256.0 30.0 L 277.2 128.8 L 324.0 150.0 L 277.2 171.2 L 256.0 270.0 L 234.8 171.2 L 188.0 150.0 L 234.8 128.8 Z" fill="#C9A961"/>
-</svg> Polaris</span><h2 id="polaris-title" tabindex="-1">A way to prepare. <br><em>A place to return.</em></h2><p>Information before the procedure, arranged as a pathway, in standard and Easy Read forms. Something to revisit, and to bring questions back to the clinical team.</p><div class="polaris-actions"><a class="text-action demo-link" href="https://demo.polaris.patient-compass.co.uk/pathway/demo-showcase" target="_blank" rel="noopener" data-action="demo_polaris">Explore the Polaris demo<span class="sr-only"> (opens in a new tab)</span> <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><button class="enlarge" type="button" data-enlarge="polaris-card" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Enlarge the screen</button><p class="evidence-note">Actual demonstration content, not a live app or patient record.</p><button class="replay" id="replay-polaris" type="button" hidden>Return to the paper door</button></div></div>
-<a class="scroll-on" href="#foundation"><span>Scroll down</span><span class="scroll-on-detail">Last page: who stands behind the words</span><svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+</svg> Polaris</span><h2 id="polaris-title" tabindex="-1">A way to prepare. <br><em>A place to return.</em></h2><p>Information before the procedure, arranged as a pathway, in standard and Easy Read forms. Something to revisit, and to bring questions back to the clinical team.</p><div class="polaris-actions"><a class="text-action demo-link" href="https://demo.polaris.patient-compass.co.uk/pathway/demo-showcase" target="_blank" rel="noopener" data-action="demo_polaris">Explore the Polaris demo<span class="sr-only"> (opens in a new tab)</span> <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><button class="enlarge" type="button" data-enlarge="polaris-card" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Enlarge the screen</button><p class="evidence-note">Actual demonstration content, not a live app or patient record.</p><button class="replay" id="replay-polaris" type="button" hidden>Return to the paper door</button></div><a class="scroll-on" href="#foundation"><span>Scroll down</span><span class="scroll-on-detail">Last page: who stands behind the words</span><svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
 </section>
 
 <div class="flash" aria-hidden="true"></div>
@@ -281,6 +290,7 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
 <section class="clinical-foundation" id="foundation" aria-labelledby="foundation-title">
 <div class="foundation-intro"><div><p class="eyebrow">Behind the words</p><h2 id="foundation-title" tabindex="-1">Behind the words, <br><em>someone stands.</em></h2></div><p class="foundation-lead">Hold the page up to the light. <br>See the work behind it.</p></div>
 <figure class="lamp-figure">
+<p class="lamp-cue" id="lamp-cue" aria-hidden="true" hidden><strong>The lamp is off.</strong>Switch it on to hold the page to the light.</p>
 <div class="lamp-media"><svg id="paper-lamp" class="lamp-scene" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="paper-lamp-title">
 <title id="paper-lamp-title">A sheet of paper held to a lamp, introducing The Compass as your daily post-operative companion. A translucent Suite mark reveals the clinical work behind the page.</title>
 <image class="leaf-photo-off" href="assets/backlight-off.webp" x="0" y="0" width="1536" height="1024" preserveAspectRatio="none"/>
@@ -309,12 +319,13 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
 </g>
 </g>
 </g>
-</svg><p class="lamp-cue" id="lamp-cue" aria-hidden="true" hidden><strong>The lamp is off.</strong>Switch it on to hold the page to the light.</p></div>
+</svg></div>
 <figcaption class="illustration-note">An illustration of a page held to a lamp. The heading, the mark and the imprint are drawn over it.</figcaption>
 </figure>
 <div class="light-reading">
-<div class="light-controls"><button class="text-action light-switch" id="light-switch" type="button" aria-pressed="false" aria-controls="paper-lamp" hidden>Switch on the lamp <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button><div class="proof-tabs" role="tablist" aria-label="Explore the clinical foundations" hidden><button role="tab" type="button" id="proof-tab-sources" aria-controls="proof-panel" aria-selected="true" data-proof="sources">The sources</button><button role="tab" type="button" id="proof-tab-signoff" aria-controls="proof-panel" aria-selected="false" tabindex="-1" data-proof="signoff">Clinical review</button><button role="tab" type="button" id="proof-tab-version" aria-controls="proof-panel" aria-selected="false" tabindex="-1" data-proof="version">Accountability</button></div></div>
+<div class="light-controls"><button class="cta light-switch" id="light-switch" type="button" aria-pressed="false" aria-controls="paper-lamp" hidden>Switch on the lamp <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button><div class="proof-tabs" role="tablist" aria-label="Explore the clinical foundations" hidden><button role="tab" type="button" id="proof-tab-sources" aria-controls="proof-panel" aria-selected="true" data-proof="sources">The sources</button><button role="tab" type="button" id="proof-tab-signoff" aria-controls="proof-panel" aria-selected="false" tabindex="-1" data-proof="signoff">Clinical review</button><button role="tab" type="button" id="proof-tab-version" aria-controls="proof-panel" aria-selected="false" tabindex="-1" data-proof="version">Accountability</button></div></div>
 <div class="proof-explanation" id="proof-panel" role="tabpanel" aria-labelledby="proof-tab-sources" tabindex="0"><h3 id="proof-title">Reliable sources.</h3><p id="proof-copy">Clinical references remain attached to the information. The evidence behind a statement can be found and reviewed.</p></div>
+<a class="cta onward" id="onward" href="#conversation" hidden>Scroll down <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
 <p class="foundation-detail imprint-list">Reliable sources.<br>Auditable clinical review.<br>Accountability for every single word.</p>
 <p class="foundation-detail">The Helm is where clinicians prepare, review and approve the information behind the patient experience. AI can help prepare a draft. Clinical approval remains human.</p>
 <p class="foundation-detail">Polaris supports preparation before the procedure, with standard and Easy Read options.</p>
@@ -344,6 +355,7 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
 // Act one: the paper door (--flap, --light, --zoom, --flash). Act two: the pile of leaflets, then Polaris (--light again).
 // Act three, below the theatre: the page held to the light (#paper-lamp gains .lit). It arrives dark; the visitor switches the lamp on. Fragments below the theatre unlock the page.
 // Every scene chosen with a button is a history entry, so Back returns to the previous scene instead of leaving the page.
+// One way through: until the visitor lights the lamp, every link that leaves the page opens in a new tab, so the story is never lost. Once lit, links behave normally.
 (() => {
   const root = document.documentElement;
   const stage = document.querySelector('#theatre');
@@ -602,7 +614,34 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
     signoff: {title: 'Auditable clinical review.', copy: 'A named clinician reviews and signs off the information for publication. Responsibility sits with a person, not with the drafting software.', stamp: ['Auditable', 'clinical review.'], detail: 'A human publication decision'},
     version: {title: 'Accountability for every single word.', copy: 'Return to the published edition, its sources and the clinical decision behind it.', stamp: ['Accountability', 'for every', 'single word.'], detail: 'A record of the information itself'}
   };
+  // Detours: links that leave the page (not fragments, not the prepared email, not the demos, which always open beside the story).
+  const detours = [...document.querySelectorAll('a[href]')].filter(link => !/^(#|mailto:)/.test(link.getAttribute('href')) && link.target !== '_blank');
+  const onward = document.querySelector('#onward');
+  let pathComplete = false;
+  function setDetours(besideTheStory) {
+    detours.forEach(link => {
+      const label = link.dataset.label || link.getAttribute('aria-label');
+      if (label) link.dataset.label = label;
+      if (besideTheStory) {
+        link.target = '_blank';
+        link.rel = 'noopener';
+        if (label) link.setAttribute('aria-label', label + ' (opens in a new tab)');
+        else if (!link.querySelector('.new-tab')) {
+          const note = document.createElement('span');
+          note.className = 'sr-only new-tab';
+          note.textContent = ' (opens in a new tab)';
+          link.insertBefore(note, link.querySelector('svg'));
+        }
+      } else {
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+        if (label) link.setAttribute('aria-label', label);
+        link.querySelectorAll('.new-tab').forEach(note => note.remove());
+      }
+    });
+  }
   function setLamp(on) {
+    if (on && !pathComplete) { pathComplete = true; setDetours(false); onward.hidden = false; }
     lampScene.classList.toggle('lit', on);
     lampMedia.classList.toggle('unlit', !on);
     lampCue.classList.toggle('gone', on);
@@ -644,6 +683,14 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
     });
   });
   lampSwitch.addEventListener('click', () => setLamp(!lampScene.classList.contains('lit')));
+  // The last step of the way: a gentle scroll to the invitation.
+  onward.addEventListener('click', event => {
+    event.preventDefault();
+    const target = document.querySelector('#conversation');
+    if (window.location.hash !== '#conversation') window.history.pushState(null, '', window.location.pathname + window.location.search + '#conversation');
+    target.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'start'});
+    focusHeading('#invitation-title');
+  });
   // Pointer convenience: the dark page itself also switches the lamp on. Keyboard and assistive technology use the switch.
   lampMedia.addEventListener('click', () => { if (!lampScene.classList.contains('lit')) setLamp(true); });
   // Fragments below the theatre (#foundation, #conversation) unlock the page and restore their target; the theatre rests on its final scene.
@@ -671,6 +718,7 @@ html.export .skip,html.export .theatre-controls{display:none!important}html.expo
   if (preference.addEventListener) preference.addEventListener('change', event => setReduced(event.matches));
   [open, door, document.querySelector('#replay'), document.querySelector('#replay-polaris'), document.querySelector('.theatre-controls'), lampSwitch, lampCue, document.querySelector('.proof-tabs')].forEach(element => { element.hidden = false; });
   resetDoor();
+  setDetours(true);
   setLamp(false);
   setReduced(reduced);
   setScene('home');
